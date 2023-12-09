@@ -107,7 +107,7 @@ def _load_data(basedir, factor=None, width=None, height=None, load_imgs=True):
     
     def imread(f):
         if f.endswith('png'):
-            return imageio.imread(f, ignoregamma=True)
+            return imageio.imread(f, apply_gamma=False) # now it's apply gamma per https://imageio.readthedocs.io/en/v2.16.1/_autosummary/_plugins/pillow/imageio.plugins.pillow.PillowPlugin.read.html#imageio.plugins.pillow.PillowPlugin.read
         else:
             return imageio.imread(f)
         
