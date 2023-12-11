@@ -6,12 +6,18 @@ import imageio
 import json
 
 
+TF_VERSION1 = tf.__version__.startswith('1')
+
 # Misc utils
 
 def img2mse(x, y): return tf.reduce_mean(tf.square(x - y))
 
 
-def mse2psnr(x): return -10.*tf.log(x)/tf.log(10.)
+def mse2psnr(x): 
+    if TF_VERSION1:
+        return -10.*tf.log(x)/tf.log(10.)
+    else:
+        return -10.*tf.math.log(x)/tf.math.log(10.)
 
 
 def to8b(x): return (255*np.clip(x, 0, 1)).astype(np.uint8)
